@@ -52,6 +52,11 @@ import { Task } from '../../models/task.model';
       padding: 2rem;
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
     }
+    @media (max-width: 599px) {
+      .form-container {
+        padding: 1.25rem;
+      }
+    }
     .form-title {
       font-size: 1.25rem;
       font-weight: 600;

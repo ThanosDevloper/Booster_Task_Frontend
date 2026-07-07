@@ -353,10 +353,68 @@ import { Task, TaskStatus } from '../../models/task.model';
       height: 18px;
     }
     
-    /* Mobile Responsive Hiding */
+    /* Mobile Responsive Card Layout */
     @media (max-width: 599px) {
+      .list-container {
+        padding: 1rem;
+      }
       .hide-mobile {
         display: none;
+      }
+      .tasks-table-wrapper {
+        overflow-x: visible;
+      }
+      .tasks-table, .tasks-table thead, .tasks-table tbody, .tasks-table tr, .tasks-table td {
+        display: block;
+        width: 100%;
+      }
+      .tasks-table thead {
+        display: none;
+      }
+      .tasks-table tr {
+        background: rgba(15, 23, 42, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: var(--border-radius-md);
+        margin-bottom: 1rem;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      .tasks-table td {
+        padding: 0;
+        border-bottom: none;
+      }
+      /* Checkbox */
+      .tasks-table td:nth-child(1) {
+        order: 1;
+        margin-right: 0.75rem;
+      }
+      /* Task Details */
+      .tasks-table td:nth-child(2) {
+        order: 2;
+        flex-grow: 1;
+        flex-shrink: 1;
+        max-width: calc(100% - 40px);
+      }
+      /* Actions */
+      .tasks-table td:nth-child(4) {
+        order: 3;
+        margin-left: auto;
+      }
+      .task-details {
+        max-width: 100% !important;
+      }
+      .task-name {
+        white-space: normal;
+        word-break: break-word;
+        font-size: 1rem;
+      }
+      .task-desc {
+        white-space: normal;
+        word-break: break-word;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
       }
     }
     
