@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Default local fallback
-let apiBaseUrl = 'http://localhost:8080/api/tasks';
+// Default live fallback (ensures Netlify build works without setting variables)
+let apiBaseUrl = 'https://booster-task-backend.onrender.com/api/tasks';
 
 // 1. Try to read from local .env file if it exists
 try {
