@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'http://localhost:8080/api/tasks';
+export const API_BASE_URL = 'https://booster-task-backend.onrender.com/api/tasks';
