@@ -1,0 +1,59 @@
+<div class="container">
+  <!-- Offline Warning Banner -->
+  <div class="offline-banner" *ngIf="isOffline()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="banner-icon">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.477c1.178-.15 2.373-.24 3.593-.27m5.91 0c1.22.03 2.415.12 3.593.27a2.15 2.15 0 011.743 1.477c.18.72.298 1.46.353 2.21m-5.485 1.242l1.5-1.5" />
+    </svg>
+    <span><strong>Offline Mode</strong>: You are viewing previously loaded tasks. Any modifications will require connection.</span>
+  </div>
+
+  <!-- Error Alerts -->
+  <div class="error-alert" *ngIf="errorMessage()">
+    <div class="alert-content">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="alert-icon">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+      </svg>
+      <span>{{ errorMessage() }}</span>
+    </div>
+    <button class="close-alert-btn" (click)="clearError()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="close-icon">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Header Panel -->
+  <header class="glass-panel header-panel">
+    <div class="header-title">
+      <h1>Booster Tasks</h1>
+      <p>Clean, interactive, and premium task management</p>
+    </div>
+    <button class="sync-btn" (click)="loadTasks()" [disabled]="isLoading()" title="Sync Tasks">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="sync-icon" [class.spinning]="isLoading()">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+      </svg>
+      {{ isLoading() ? 'Syncing...' : 'Sync Now' }}
+    </button>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-grid">
+    <!-- Left Column: Form -->
+    <section class="form-section">
+      <app-task-form (taskCreated)="onTaskCreated($event)"></app-task-form>
+    </section>
+
+    <!-- Right Column: Dashboard + List -->
+    <section class="content-section">
+      <!-- Reactive Stats Dashboard -->
+      <app-dashboard [tasks]="tasks()"></app-dashboard>
+
+      <!-- Task Listing Component -->
+      <app-task-list 
+        [tasks]="tasks()"
+        (statusToggled)="onStatusToggled($event)"
+        (taskDeleted)="onTaskDeleted($event)"
+      ></app-task-list>
+    </section>
+  </main>
+</div>
