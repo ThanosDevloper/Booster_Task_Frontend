@@ -4,6 +4,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TaskService } from './task.service';
 import { Task } from '../models/task.model';
 import { describe, beforeEach, it, expect, afterEach } from 'vitest';
+import { API_BASE_URL } from '../config';
 
 describe('TaskService', () => {
   let service: TaskService;
@@ -44,7 +45,7 @@ describe('TaskService', () => {
       expect(JSON.parse(cached!)).toEqual(mockTasks);
     });
 
-    const req = httpTestingController.expectOne('http://localhost:8080/api/tasks');
+    const req = httpTestingController.expectOne(API_BASE_URL);
     expect(req.request.method).toBe('GET');
     req.flush(mockTasks);
   });
@@ -62,7 +63,7 @@ describe('TaskService', () => {
       }
     });
 
-    const req = httpTestingController.expectOne('http://localhost:8080/api/tasks');
+    const req = httpTestingController.expectOne(API_BASE_URL);
     req.error(new ProgressEvent('Network error'), { status: 0 });
   });
 });

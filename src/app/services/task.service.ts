@@ -3,12 +3,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Task, TaskStatus } from '../models/task.model';
+import { API_BASE_URL } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private readonly apiUrl = 'http://localhost:8080/api/tasks';
+  private readonly apiUrl = API_BASE_URL;
   private readonly storageKey = 'cached_tasks';
 
   public isOffline = signal(false);
